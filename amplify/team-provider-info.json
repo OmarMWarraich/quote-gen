@@ -1,0 +1,15 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-quotegen-dev-83034-authRole",
+      "UnauthRoleArn": "arn:aws:iam::484494363864:role/amplify-quotegen-dev-83034-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::484494363864:role/amplify-quotegen-dev-83034-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-quotegen-dev-83034-deployment",
+      "UnauthRoleName": "amplify-quotegen-dev-83034-unauthRole",
+      "StackName": "amplify-quotegen-dev-83034",
+      "StackId": "arn:aws:cloudformation:us-east-1:484494363864:stack/amplify-quotegen-dev-83034/829b4a20-041a-11ee-a872-1298db5698dd",
+      "AmplifyAppId": "d2n5mmbch9tdtl"
+    }
+  }
+}
