@@ -7,6 +7,9 @@
 # Lambda function
 type Query {
   generateAQuote(input: AWSJSON!): String
+   @auth(rules: [
+   { allow: public, provider: iam }
+  ])
   @function(name: "quoteLambda-${env}")
 }
 
@@ -14,6 +17,9 @@ type Query {
 
 type QuoteAppData
   @model
+  @auth(rules: [
+    { allow: public, provider: iam, operations: [read] }
+  ])
   {
     id: ID!
     queryName: String!
