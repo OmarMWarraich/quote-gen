@@ -14,6 +14,15 @@
     "categories": {
       "auth": {
         "quotegen5fe678cf": {}
+      },
+      "function": {
+        "quoteLambda": {
+          "deploymentBucketName": "amplify-quotegen-dev-83034-deployment",
+          "s3Key": "amplify-builds/quoteLambda-73726254754d46792f2f-build.zip"
+        }
+      },
+      "api": {
+        "quotegen": {}
       }
     }
   }
