@@ -1,7 +1,12 @@
 import React from 'react'
 import Image from 'next/image'
 
-const ImageBlob = () => {
+interface ImageBlobProps {
+  quoteReceived: String | null;
+  blobUrl: string | null;
+}
+
+const ImageBlob = ({blobUrl, quoteReceived}:ImageBlobProps ) => {
   return (
     <div>ImageBlob</div>
   )

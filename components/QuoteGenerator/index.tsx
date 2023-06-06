@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 // Material UI Imports
 import { Backdrop, Fade, Modal } from '@mui/material'
@@ -31,6 +31,33 @@ const QuoteGeneratorModal = ({
 
     const wiseDevQuote = "The best way to predict the future is to create it.";
     const wiseDevQuoteAuthor = "Abraham Lincoln";
+
+    const [blobUrl, setBlobUrl] = useState<string | null>(null);
+
+    // Function: Handling the download of quote card
+    const handleDownload = () => {
+        const link = document.createElement('a');
+        if (typeof blobUrl === 'string') {
+            link.href = blobUrl;
+            link.download = 'quote.png';
+            link.click();
+        }
+    };
+
+    // Function: Handle the receiving of quote card
+    useEffect(() => {
+        if (quoteReceived) {
+            const binaryData = Buffer.from(quoteReceived, 'base64');
+            const blob = new Blob([binaryData], { type: 'image/png' });
+            const blobUrlGenerated = URL.createObjectURL(blob);
+            console.log(blobUrlGenerated);
+            setBlobUrl(blobUrlGenerated);
+
+            return () => {
+                URL.revokeObjectURL(blobUrlGenerated);
+            }
+        }
+    }, [quoteReceived])
 
     return (
         <Modal
@@ -70,18 +97,19 @@ const QuoteGeneratorModal = ({
                         {/* State #2: Quote state fulfilled */}
                          {quoteReceived !== null && 
                             <>
-                                <QuoteGeneratorTitle>
+                                <QuoteGeneratorTitle style={{marginTop:20}}>
                                     Download your quote!
                                 </QuoteGeneratorTitle>
                                 <QuoteGeneratorSubTitle style={{marginTop: "20px"}}>
                                     See a preview:
                                 </QuoteGeneratorSubTitle>
                                 <ImageBlobCon>
-                                    <ImageBlob/>
+                                    <ImageBlob
+                                        quoteReceived={quoteReceived}
+                                        blobUrl={blobUrl}
+                                    />
                                 </ImageBlobCon>
-                                <AnimatedDownloadButton
-                                    
-                                />
+                                <AnimatedDownloadButton handleDownload={handleDownload}/>
                             </>
                         }
 
