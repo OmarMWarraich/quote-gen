@@ -25,6 +25,7 @@ import Cloud2 from "../assets/cloud2-nobg.png";
 import { API } from 'aws-amplify';
 import { quoteQueryName } from '@/src/graphql/queries';
 import { GraphQLResult } from '@aws-amplify/api-graphql';
+import QuoteGeneratorModal from '../components/QuoteGenerator';
       
 /* Interface for DDB Obj */
 
@@ -48,6 +49,10 @@ function isGraphQLResultForQuoteQueryName(response: any): response is GraphQLRes
 
 export default function Home() {
   const [numberOfQuotes, setNumberOfQuotes] = useState<Number | null>(0);
+  const [openGenerator, setOpenGenerator] = useState(false);
+  const [processingQuote, setProcessingQuote] = useState(false);
+  const [quoteReceived, setQuoteReceived] = useState<String | null>(null);
+
 
   /* Fn: fetch DDb obj (quotes gen) */
 
@@ -62,7 +67,7 @@ export default function Home() {
       })
       // console.log('response',res);
 
-      /* Create Typeguards */
+      /* Typeguards */
 
       if (!isGraphQLResultForQuoteQueryName(res)) {
         throw new Error('Response data is undefined');
@@ -85,6 +90,17 @@ export default function Home() {
     updateQuoteInfo();
   }, [])
 
+  /* fn: quote generator modal */
+
+  const handleCloseGenerator = () => {
+    setOpenGenerator(false);
+  }
+
+  const handleOpenGenerator = async(e: React.SyntheticEvent) => {
+    e.preventDefault();
+    setOpenGenerator(true);
+  }
+
   return (
     <>
       <Head>
@@ -100,6 +116,18 @@ export default function Home() {
       {/* Quote Generator Model Pop-Up */}
 
       {/* Quote Generator Modal */}
+
+      <QuoteGeneratorModal
+        open = {openGenerator}
+        close = {handleCloseGenerator}
+        processingQuote = {processingQuote}
+        setProcessingQuote = {setProcessingQuote}
+        quoteReceived = {quoteReceived}
+        setQuoteReceived = {setQuoteReceived}
+        
+      />
+
+
 
       {/* Quote Generator */}
 
@@ -118,7 +146,7 @@ export default function Home() {
           </QuoteGeneratorSubTitle>
 
           <GenerateQuoteButton
-            onClick={() => {null}}
+            onClick={handleOpenGenerator}
             >
               <GenerateQuoteButtonText>Generate Quote</GenerateQuoteButtonText>
           </GenerateQuoteButton>
