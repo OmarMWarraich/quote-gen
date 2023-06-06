@@ -3,8 +3,23 @@ import Head from 'next/head'
 import Image from 'next/image'
 import styles from '@/styles/Home.module.css'
 
-import { BackGroundImage1, BackGroundImage2, FootCon, FooterLink, GradientBackgroundCon, RedSpan } from '@/components/QuoteGenerator/QuoteGeneratorElements'
+/* Components */
+import { 
+        BackgroundImage1, 
+        BackgroundImage2, 
+        FooterCon, 
+        FooterLink, 
+        GenerateQuoteButton, 
+        GenerateQuoteButtonText, 
+        GradientBackgroundCon, 
+        QuoteGeneratorCon, 
+        QuoteGeneratorInnerCon, 
+        QuoteGeneratorSubTitle, 
+        QuoteGeneratorTitle, 
+        RedSpan 
+      } from '@/components/QuoteGenerator/QuoteGeneratorElements'
 
+/* Assets */
 import Cloud1 from "../assets/cloud1-nobg.png";
 import Cloud2 from "../assets/cloud2-nobg.png";
 
@@ -19,19 +34,45 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
 
+      {/* Background */}
+
       <GradientBackgroundCon>
 
-        <BackGroundImage1
+      {/* Quote Generator Model Pop-Up */}
+
+      <QuoteGeneratorCon>
+        <QuoteGeneratorInnerCon>
+          <QuoteGeneratorTitle>Inspirational Quote Generator</QuoteGeneratorTitle>
+          <QuoteGeneratorSubTitle>Looking for an inspirational quote? <br/>
+          Click the button below to generate a random quote! provided by 
+          <FooterLink
+            href="https://zenquotes.io/"
+            target="_blank"
+            rel="noopener noreferrer"
+            >
+              ZenQuotes.io
+          </FooterLink>
+          </QuoteGeneratorSubTitle>
+
+          <GenerateQuoteButton
+            onClick={() => {null}}
+            >
+              <GenerateQuoteButtonText>Generate Quote</GenerateQuoteButtonText>
+          </GenerateQuoteButton>
+        </QuoteGeneratorInnerCon>
+      </QuoteGeneratorCon>
+
+        <BackgroundImage1
           src={Cloud1}
           alt="Cloud1"
           />
 
-        <BackGroundImage2
+        <BackgroundImage2
           src={Cloud2}
           alt="Cloud2"
           />
 
-        <FootCon>
+        <FooterCon>
           <>
             Quotes Generated: {numberOfQuotes}
             <br/>
@@ -45,7 +86,7 @@ export default function Home() {
               </FooterLink>
 
           </>
-        </FootCon>
+        </FooterCon>
 
       </GradientBackgroundCon>
     </>
