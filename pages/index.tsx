@@ -99,6 +99,18 @@ export default function Home() {
   const handleOpenGenerator = async(e: React.SyntheticEvent) => {
     e.preventDefault();
     setOpenGenerator(true);
+    setProcessingQuote(true);
+    try {
+      /* fn: lambda */
+      // setProcessingQuote(false);
+      setTimeout(() => {
+        setProcessingQuote(false);
+      }, 3000);
+
+    } catch(error) {
+      console.log('error generating quote:', error);
+      setProcessingQuote(false);
+    }
   }
 
   return (
